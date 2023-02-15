@@ -1,0 +1,38 @@
+{
+	"name": "atomjoy/trans",
+	"description": "Laravel database translations.",
+	"type": "library",
+	"license": "MIT",
+	"autoload": {
+		"classmap": [
+			"src/"
+		],
+		"psr-4": {
+			"Trans\\": "src/",
+			"Database\\Migrations\\": "database/migrations/"
+		},
+		"files": [
+			"src/Helper.php"
+		]
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Tests\\": "tests/"
+		}
+	},
+	"authors": [
+		{
+			"name": "Atomjoy",
+			"email": "atomjoy.official@gmail.com"
+		}
+	],
+	"minimum-stability": "dev",
+	"require": {},
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Trans\\TransServiceProvider"
+			]
+		}
+	}
+}
