@@ -47,9 +47,9 @@ use Trans\Models\Translate;
 Route::get('/trans', function () {
  try {
   // Add translation for locale
-  if (Translate::all()->count() == 0) {
-   Translate::create(['locale' => 'pl', 'key' => 'Hello', 'value' => 'Witaj']);
-  }
+  Translate::updateOrCreate([
+   'locale' => 'pl', 'key' => 'Hello'
+  ], ['value' => 'Witaj']);
 
   // Change locale
   app()->setLocale('pl');
