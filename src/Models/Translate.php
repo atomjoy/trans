@@ -4,6 +4,7 @@ namespace Trans\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class Translate extends Model
 {
@@ -15,7 +16,25 @@ class Translate extends Model
 	public static function trans($str)
 	{
 		$locale = app()->getLocale();
-		return self::text($str)->locale($locale)->first()->value ?? trans($str);
+		return Translate::text($str)->locale($locale)->first()->value ?? trans($str);
+	}
+
+	// Add to db
+	public static function add($key, $value, $locale = 'en')
+	{
+		if (!empty($key) && !empty($value) && !empty($locale)) {
+			Translate::updateOrCreate([
+				'locale' => $locale, 'key' => $key
+			], ['value' => $value]);
+
+			return true;
+		}
+		return false;
+	}
+
+	public static function clearCache()
+	{
+		return Cache::store('file')->flush();
 	}
 
 	// Scope key
